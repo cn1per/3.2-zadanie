@@ -1,3 +1,6 @@
+## 2026-10-27 19:29 — sasa
+assasas
+
 ## 2026-10-27 19:23 — Zmiany w aplikacji notatnika
 Dodano pola tytułu i treści, przycisk zapisu oraz listę zapisanych notatek. Notatki są zapisywane w pliku notatki.md w folderze projektu, najnowsza trafia na górę, a polskie znaki są zachowane. Poprawiono też widok pustej listy oraz zgodność XAML z używaną wersją Avalonia. Projekt buduje się bez błędów i ostrzeżeń.
 
