@@ -165,6 +165,7 @@ public partial class MainWindow : Window
     private void UpdateNoteCount()
     {
         NoteCount.Text = Notes.Count.ToString();
+        EmptyNotes.IsVisible = Notes.Count == 0;
     }
 
     private void SetStatus(string message, bool isError)
