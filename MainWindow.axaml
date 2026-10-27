@@ -2,8 +2,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
         x:Class="notatnik.MainWindow"
-        Title="notatnik">
-    Welcome to Avalonia!
+        Title="Notatnik"
+        Width="1000"
+        Height="680"
+        MinWidth="760"
+        MinHeight="540"
+        Background="#F4F6FA"
+        FontFamily="Inter, Segoe UI, sans-serif">
+    <Grid RowDefinitions="Auto,*" Margin="36">
+        <StackPanel Spacing="6" Margin="0,0,0,28">
+            <TextBlock Text="Mój notatnik" FontSize="30" FontWeight="Bold" Foreground="#172033"/>
+            <TextBlock Text="Zapisuj pomysły i wracaj do nich, kiedy tylko chcesz."
+                       FontSize="14" Foreground="#68738A"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" ColumnDefinitions="1.15*,0.85*" ColumnSpacing="22">
+            <Border Grid.Column="0" Background="White" CornerRadius="16" Padding="26">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto" RowSpacing="12">
+                    <TextBlock Text="Nowa notatka" FontSize="19" FontWeight="SemiBold" Foreground="#172033"/>
+
+                    <TextBlock Grid.Row="1" Text="TYTUŁ" FontSize="11" FontWeight="Bold"
+                               Foreground="#68738A" LetterSpacing="1"/>
+                    <TextBox x:Name="TitleInput" Grid.Row="2" Watermark="np. Pomysł na weekend"
+                             Padding="12" FontSize="14" BorderBrush="#DDE2EC"
+                             Background="#FBFCFE" CornerRadius="8"/>
+
+                    <TextBlock Grid.Row="3" Text="TREŚĆ" FontSize="11" FontWeight="Bold"
+                               Foreground="#68738A" LetterSpacing="1"/>
+                    <TextBox x:Name="ContentInput" Grid.Row="4" Watermark="Zacznij pisać..."
+                             AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
+                             Padding="12" FontSize="14" BorderBrush="#DDE2EC"
+                             Background="#FBFCFE" CornerRadius="8"/>
+
+                    <Button Grid.Row="5" Content="Zapisz notatkę" Click="SaveNote_Click"
+                            HorizontalAlignment="Left" Padding="20,11" CornerRadius="8"
+                            Background="#4257D6" Foreground="White" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="StatusText" Grid.Row="6" FontSize="12"
+                               Foreground="#68738A" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Background="White" CornerRadius="16" Padding="26">
+                <Grid RowDefinitions="Auto,*">
+                    <DockPanel Margin="0,0,0,18">
+                        <TextBlock Text="Zapisane notatki" FontSize="19" FontWeight="SemiBold"
+                                   Foreground="#172033"/>
+                        <Border DockPanel.Dock="Right" Background="#EEF0FF" CornerRadius="12"
+                                Padding="9,3" VerticalAlignment="Center">
+                            <TextBlock x:Name="NoteCount" Text="0" FontSize="12"
+                                       FontWeight="SemiBold" Foreground="#4257D6"/>
+                        </Border>
+                    </DockPanel>
+
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Notes}" Background="Transparent"
+                             BorderThickness="0" Padding="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F8F9FC" CornerRadius="10" Padding="14"
+                                        Margin="0,0,0,10">
+                                    <StackPanel Spacing="7">
+                                        <DockPanel>
+                                            <TextBlock Text="{Binding Title}" FontSize="15"
+                                                       FontWeight="SemiBold" Foreground="#172033"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock DockPanel.Dock="Right" Text="{Binding DateLabel}"
+                                                       FontSize="11" Foreground="#8A93A5"
+                                                       Margin="10,2,0,0"/>
+                                        </DockPanel>
+                                        <TextBlock Text="{Binding Preview}" FontSize="12"
+                                                   Foreground="#68738A" TextWrapping="Wrap"
+                                                   MaxHeight="38" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.EmptyContent>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+                                <TextBlock Text="Jeszcze tu pusto" FontSize="15" FontWeight="SemiBold"
+                                           Foreground="#68738A" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Twoje zapisane notatki pojawią się w tym miejscu."
+                                           FontSize="12" Foreground="#8A93A5" TextWrapping="Wrap"
+                                           TextAlignment="Center" MaxWidth="220"/>
+                            </StackPanel>
+                        </ListBox.EmptyContent>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </Window>
